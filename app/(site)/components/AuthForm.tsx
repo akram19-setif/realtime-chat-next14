@@ -4,8 +4,10 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Input from "./inputs/Input";
 import Button from "./Button";
 import AuthSocialButton from "./AuthSocialButton";
-import { GrGoogle } from "react-icons/gr";
 import { BsGithub, BsGoogle } from "react-icons/bs";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 type Varient = "LOGIN" | "REGISTER";
 function AuthForm() {
@@ -34,13 +36,39 @@ function AuthForm() {
     console.log(data);
 
     if (variant === "REGISTER") {
+      axios
+        .post(`/api/register`, data)
+        .catch(() => toast.error("Something went wrong!"))
+        .finally(() => setIsLoading(false));
+      setIsLoading(false);
     }
     if (variant === "LOGIN") {
+      signIn("credentials", { ...data, redirect: false })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Invalid Credentials");
+          }
+
+          if (callback?.ok && !callback?.error) {
+            toast.success("Login Success!");
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
   };
   const socialAction = (action: string) => {
     setIsLoading(true);
-    // NextAuth social sign In
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("Invalid Credentials");
+        }
+
+        if (callback?.ok && !callback?.error) {
+          toast.success("Login Success!");
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
   return (
     <div
@@ -58,7 +86,7 @@ function AuthForm() {
             <Input
               label='Name'
               register={register}
-              id='Name'
+              id='name'
               errors={errors}
               disabled={isLoading}
             />
@@ -97,8 +125,14 @@ function AuthForm() {
             </div>
           </div>
           <div className='mt-6 gap-2 flex '>
-            <AuthSocialButton onClick={() => {}} icon={BsGithub} />
-            <AuthSocialButton onClick={() => {}} icon={BsGoogle} />
+            <AuthSocialButton
+              onClick={() => socialAction("github")}
+              icon={BsGithub}
+            />
+            <AuthSocialButton
+              onClick={() => socialAction("google")}
+              icon={BsGoogle}
+            />
           </div>
         </div>
         <div className='flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500'>

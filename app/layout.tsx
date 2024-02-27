@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
-
 import ToasterContext from "./context/ToastContext";
 
 import "./globals.css";
+import AuthContext from "./context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Messenger Clone",
@@ -20,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <ToasterContext /> {children}
+        <AuthContext>
+          <ToasterContext /> {children}
+        </AuthContext>
       </body>
     </html>
   );

@@ -8,20 +8,16 @@ const useConversation = () => {
     }
     return params.conversationId as string;
   }, [params?.conversationId]);
-  return useMemo(
-    () => ({
-      conversationId,
-    }),
-    [conversationId]
-  );
+
   // eslint-disable-next-line
   const isOpen = useMemo(() => !!conversationId, [conversationId]);
   // eslint-disable-next-line
   return useMemo(
-    () => () => ({
+    ()  => ({
       isOpen,
       conversationId,
     }),
     [isOpen, conversationId]
   );
 };
+export default useConversation;

@@ -1,7 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    // swcPlugins: [["next-superjson-plugin", {}]],
+    appDir: true,
+    swcPlugins: ["next-superjson-plugin", {}],
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*",
+      },
+    ],
   },
 };
 

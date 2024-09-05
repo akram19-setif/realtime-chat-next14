@@ -14,6 +14,7 @@ function Avatar({ user }: AvatarProps) {
       >
         <Image src={user?.image || "/placeholder.jpg"} fill alt='avatar' />
       </div>
+      <span className='absolute block rounded-full bg-green-500 ring-2 ring-white dark:ring-gray-900 h-2 w-2 top-0 right-0 md:h-3 md:w-3' />
     </div>
   );
 }

@@ -17,7 +17,6 @@ function UserBox({ data }: userBoxProps) {
       .post("/api/conversations", { userId: data.id })
       .then((data) => {
         router.push(`/users/${data.data.id}`);
-        setIsLoading(false);
       })
       .finally(() => setIsLoading(false));
   }, [data, router]);

@@ -34,7 +34,7 @@ export async function POST(request: Request) {
       });
       return NextResponse.json(newConversation);
     }
-    const existingConversations = await prisma?.conversation.findMany({
+    const existingConversations: any = await prisma?.conversation.findMany({
       where: {
         OR: [
           {

@@ -10,6 +10,9 @@ import AuthContext from "./context/AuthContext";
 export const metadata: Metadata = {
   title: "Messenger Clone",
   description: "a best app to real time messaging",
+  icons: {
+    icon: "/favicon.ico",
+  }
 };
 
 export default function RootLayout({

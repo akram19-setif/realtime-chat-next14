@@ -27,9 +27,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
         placeholder={placeholder}
         {...register(id, { required })}
         aria-invalid={errors[id] ? "true" : "false"}
-        className="text-black font-light py-2 px-4 bg-neutral-100 w-full rounded-full focus:outline-none"
+        className='text-black font-light py-2 px-4 bg-neutral-100 w-full rounded-full focus:outline-none'
       />
-      {errors[id] && <span role='alert'>This field is required</span>}
     </div>
   );
 };

@@ -6,9 +6,10 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { HiPhoto } from "react-icons/hi2";
 import MessageInput from "./MessageInput";
 import { HiPaperAirplane } from "react-icons/hi2";
+import { CldUploadButton } from "next-cloudinary";
 
 export default function Form() {
-  const { conversationId } = useConversation();
+  const { conversationId } = useConversation(); // Keep this as it might be needed later
   const {
     register,
     handleSubmit,
@@ -19,14 +20,49 @@ export default function Form() {
       message: "",
     },
   });
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+    console.log("Form onSubmit called with data:", data); // For form submission
     setValue("message", "", { shouldValidate: true });
     axios.post(`/api/messages`, { ...data, conversationId });
   };
+
+  // Let's try the simplest possible inline onUpload first
+  const handleUpload = (result: any) => {
+    if (
+      result.info &&
+      typeof result.info === "object" &&
+      "secure_url" in result.info
+    ) {
+      axios.post(`/api/messages`, {
+        image: (result.info as { secure_url: string }).secure_url,
+        conversationId,
+      });
+    }
+  };
+
+
+
   return (
     <div className='flex items-center gap-2 lg:gap-4 w-full border-t bg-white px-4 py-4'>
-      <HiPhoto size={30} className='text-sky-500 cursor-pointer' />
+      <CldUploadButton
+        uploadPreset='v9r1tp3k' // Your preset
+        onSuccess={handleUpload}
+        onError={(error: any, widget: any) => {
+          console.error("--- CldUploadButton onError CALLED (inline) ---");
+          console.error("onError Error:", error);
+          console.error("onError Widget:", widget);
+        }}
+        // onUploadAdded={(result: any, widget: any) => {
+        //   // Another event to test
+        //   console.log("--- CldUploadButton onUploadAdded CALLED (inline) ---");
+        //   console.log("onUploadAdded Result:", result);
+        //   console.log("onUploadAdded Widget:", widget);
+        // }}
+      >
+        <HiPhoto size={30} className='text-sky-500 cursor-pointer' />
+      </CldUploadButton>
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         className=' flex items-center gap-2 lg:gap-4 w-full'
@@ -35,7 +71,7 @@ export default function Form() {
           id='message'
           register={register}
           errors={errors}
-          required
+          // required // Temporarily remove to simplify if needed
           placeholder='Write a message'
         />
         <button

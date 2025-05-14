@@ -1,4 +1,4 @@
-import EmptyState from "@/app/(site)/components/EmptyState";
+import EmptyState from "@/app/components/EmptyState";
 import getConversationById from "@/app/actions/getConversationById";
 import getMessages from "@/app/actions/getMessages";
 import Header from "./components/Header";

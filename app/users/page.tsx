@@ -1,5 +1,5 @@
 import React from "react";
-import EmptyState from "../(site)/components/EmptyState";
+import EmptyState from "../components/EmptyState";
 
 function page() {
   return (

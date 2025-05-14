@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 // components
-import AuthForm from "./components/AuthForm";
+import AuthForm from "../components/AuthForm";
 
 function page() {
   return (

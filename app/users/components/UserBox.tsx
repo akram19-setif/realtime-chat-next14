@@ -1,5 +1,5 @@
 "use client";
-import Avatar from "@/app/(site)/components/Avatar";
+import Avatar from "@/app/components/Avatar";
 import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";

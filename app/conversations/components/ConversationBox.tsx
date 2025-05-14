@@ -5,7 +5,7 @@ import { FullConversationType } from "@/app/types";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
-import Avatar from "@/app/(site)/components/Avatar";
+import Avatar from "@/app/components/Avatar";
 import { format } from "date-fns";
 
 interface conversationBoxProps {

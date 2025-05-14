@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "../(site)/components/sidebar/SideBar";
+import SideBar from "../components/sidebar/SideBar";
 import getUsers from "../actions/getUsers";
 import UserList from "./components/UserList";
 

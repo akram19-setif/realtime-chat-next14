@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import useConversation from "@/app/hooks/useConversation";
-import EmptyState from "../(site)/components/EmptyState";
+import EmptyState from "../components/EmptyState";
 
 const Home = () => {
   const { isOpen } = useConversation();

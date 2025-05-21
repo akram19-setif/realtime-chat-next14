@@ -87,7 +87,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
               </div>
               <div className='mt-2 flex items-center gao-x-3'>
                 <Image
-                  src={image || currentUser?.image || "images/placeholder.jpg"}
+                  src={image || currentUser?.image || "/images/placeholder.jpg"}
                   width={48}
                   height={48}
                   className=' rounded-full'

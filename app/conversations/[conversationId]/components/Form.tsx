@@ -41,8 +41,6 @@ export default function Form() {
     }
   };
 
-
-
   return (
     <div className='flex items-center gap-2 lg:gap-4 w-full border-t bg-white px-4 py-4'>
       <CldUploadButton
@@ -50,8 +48,6 @@ export default function Form() {
         onSuccess={handleUpload}
         onError={(error: any, widget: any) => {
           console.error("--- CldUploadButton onError CALLED (inline) ---");
-          console.error("onError Error:", error);
-          console.error("onError Widget:", widget);
         }}
         // onUploadAdded={(result: any, widget: any) => {
         //   // Another event to test

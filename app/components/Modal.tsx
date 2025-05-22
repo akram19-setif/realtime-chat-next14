@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             <Dialog.Panel className='relative w-full max-w-lg transform overflow-hidden rounded-lg bg-white p-6 text-left shadow-xl transition-all'>
               <button
                 type='button'
-                className='absolute top-3 right-3 text-gray-500 hover:text-gray-700'
+                className='absolute top-3 right-3 text-gray-500 hover:text-gray-700 z-20'
                 onClick={onClose}
               >
                 <IoClose size={24} />

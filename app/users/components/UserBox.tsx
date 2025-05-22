@@ -1,5 +1,6 @@
 "use client";
 import Avatar from "@/app/components/Avatar";
+import LoadingModal from "@/app/components/LoadingModal";
 import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -16,24 +17,28 @@ function UserBox({ data }: userBoxProps) {
     axios
       .post("/api/conversations", { userId: data.id })
       .then((data) => {
-        router.push(`/users/${data.data.id}`);
+        router.push(`/conversations/${data.data.id}`);
       })
       .finally(() => setIsLoading(false));
   }, [data, router]);
   return (
-    <div
-      className='cursor-pointer hover:bg-neutral-100  transition w-full relative flex items-center gap-3 bg-white p-4 rounded-lg'
-      onClick={handleClick}
-    >
-      <Avatar user={data} />
-      <div className='min-w-0 flex-1'>
-        <div className='flex justify-between items-center mb-1'>
-          <p className='text-sm font-medium text-gray-900 truncate'>
-            {data.name}
-          </p>
+    <>
+      {isLoading && <LoadingModal />}
+
+      <div
+        className='cursor-pointer hover:bg-neutral-100  transition w-full relative flex items-center gap-3 bg-white p-4 rounded-lg'
+        onClick={handleClick}
+      >
+        <Avatar user={data} />
+        <div className='min-w-0 flex-1'>
+          <div className='flex justify-between items-center mb-1'>
+            <p className='text-sm font-medium text-gray-900 truncate'>
+              {data.name}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

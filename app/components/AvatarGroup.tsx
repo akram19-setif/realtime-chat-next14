@@ -22,7 +22,7 @@ function AvatarGroup({ users = [] }: AvatarGroupProps) {
           } z-10 inline-block overflow-hidden rounded-full h-[21px] w-[21px] `}
         >
           <Image
-            src={user?.image || "/images/placeholder.jpg"}
+            src={user?.image || "/placeholder.jpg"}
             alt='Avatar'
             fill
           />

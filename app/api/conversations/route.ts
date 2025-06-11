@@ -1,4 +1,5 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import { pusherServer } from "@/app/libs/pusher";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -31,6 +32,11 @@ export async function POST(request: Request) {
         include: {
           users: true,
         },
+      });
+      newConversation?.users.forEach((user) => {
+        if (user.email) {
+          pusherServer.trigger(user.email, "conversation:new", newConversation);
+        }
       });
       return NextResponse.json(newConversation);
     }
@@ -70,6 +76,11 @@ export async function POST(request: Request) {
       include: {
         users: true,
       },
+    });
+    newConversation?.users.forEach((user) => {
+      if (user.email) {
+        pusherServer.trigger(user.email, "conversation:new", newConversation);
+      }
     });
     return NextResponse.json(newConversation);
   } catch (error: any) {
